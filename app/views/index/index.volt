@@ -1,4 +1,4 @@
-{% extends "layout/base.html" %}
+{% extends "layout/base.volt" %}
 
 {% block title %}
         This is the title for index action in index controller
