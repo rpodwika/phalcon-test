@@ -4,4 +4,5 @@
 /config/development/
 .idea
 /logs/*
+/app/config/config.ini
 

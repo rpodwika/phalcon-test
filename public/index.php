@@ -7,25 +7,31 @@
  */
 error_reporting(E_ALL);
 
+use \Phalcon\Config\Adapter\Ini as Config;
+
 try {
 
-    //Register an autoloader
+    //Configuration
+    $config = new Config('../app/config/config.ini');
     $loader = new \Phalcon\Loader();
-    $loader->registerDirs(array(
-        '../app/controllers/',
-        '../app/models/'
-    ))->register();
-
-    //Create a DI
+    $loader->registerDirs($config->phalcon->toArray())->register();
     $di = new Phalcon\DI\FactoryDefault();
 
-    //Setup the view component
-    $di->set('view', function(){
+    $di->set('view', function() use ($config){
         $view = new \Phalcon\Mvc\View();
-        $view->setViewsDir('../app/views/');
-        $view->registerEngines([
-            ".volt" =>  'Phalcon\Mvc\View\Engine\Volt'
-        ]);
+        $view->setViewsDir($config->phalcon->viewsDir);
+        $voltEng     = $config->voltengines->toArray();
+        $suffixs = [];
+
+        foreach($voltEng as $configKey => &$configVal) {
+            foreach($configVal as $suffix => &$handler){
+                $suffixs['.'.$suffix] = $handler;
+            }
+        }
+
+        $view->registerEngines($suffixs);
+        unset($arr);
+        unset($suffixs);
         return $view;
     });
 

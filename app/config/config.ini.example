@@ -1,0 +1,15 @@
+[database]
+adapter  = Mysql
+host     = localhost
+username = root
+password =
+dbname   = phalcon
+
+[phalcon]
+controllersDir = "../app/controllers/"
+modelsDir      = "../app/models/"
+viewsDir       = "../app/views/"
+
+[voltengines]
+.volt          = "Phalcon\Mvc\View\Engine\Volt"
+
