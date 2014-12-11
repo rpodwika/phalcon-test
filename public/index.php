@@ -24,7 +24,7 @@ try {
         $view = new \Phalcon\Mvc\View();
         $view->setViewsDir('../app/views/');
         $view->registerEngines([
-            ".html" =>  'Phalcon\Mvc\View\Engine\Volt'
+            ".volt" =>  'Phalcon\Mvc\View\Engine\Volt'
         ]);
         return $view;
     });
