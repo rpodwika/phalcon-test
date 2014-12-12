@@ -12,7 +12,7 @@ class IndexController extends \Phalcon\Mvc\Controller
     public function indexAction()
     {
         $this->view->test = "Hello phalcon volt template";
-        $arr = ['ab','bc','cd','ed'];
+        $arr = ['ab', 'bc', 'cd', 'ed'];
         $this->view->arr = $arr;
     }
 
