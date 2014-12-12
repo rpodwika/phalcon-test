@@ -15,9 +15,12 @@ try {
     $config = new Config('../app/config/config.ini');
     $loader = new \Phalcon\Loader();
     $loader->registerDirs($config->phalcon->toArray())->register();
+    $loader->registerNamespaces([
+        'Models'    => "../app/models/",
+    ]);
     $di = new Phalcon\DI\FactoryDefault();
 
-    $di->set('view', function() use ($config){
+    $di->set('view', function() use ($config) {
         $view = new \Phalcon\Mvc\View();
         $view->setViewsDir($config->phalcon->viewsDir);
         $voltEng     = $config->voltengines->toArray();
@@ -33,6 +36,10 @@ try {
         unset($arr);
         unset($suffixs);
         return $view;
+    });
+
+    $di->set('db', function() use ($config) {
+        return new \Phalcon\Db\Adapter\Pdo\Mysql($config->database->toArray());
     });
 
     //Setup a base URI so that all generated URIs include the "tutorial" folder
