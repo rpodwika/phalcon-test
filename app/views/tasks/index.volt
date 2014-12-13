@@ -3,20 +3,12 @@
 {% block title %}Display list of tasks{% endblock %}
 
 {% block body %}
-<table>
-    <thead>
-        <tr>
-            <th>name</th>
-            <th>description</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for task in tasks  %}
-    <tr>
-        <td>{{ task.getName() }}</td>
-        <td>{{ task.getDescription() }}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <div class="list-group" style="margin-top:90px;">
+        {% for task in tasks %}
+        <a href="#" class="list-group-item active">
+            <h4 class="list-group-item-heading">{{ task.getName() }}</h4>
+            <p class="list-group-item-text">{{ task.getDescription() }}</p>
+        </a>
+        {%  endfor %}
+    </div>
 {% endblock %}
