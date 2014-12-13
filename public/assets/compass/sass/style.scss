@@ -1,0 +1,5 @@
+@import 'compass/css3';
+
+.shadow {
+  @include box-shadow(#000 5px 5px 5px);
+}
