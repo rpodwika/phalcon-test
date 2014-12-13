@@ -32,6 +32,7 @@ try {
         $volt->setOptions(array(
             "compiledPath"      => $config->view->compiledPath,
             "compiledExtension" => $config->view->compliedExtension,
+            "compileAlways"     => true
         ));
         return $volt;
     });
