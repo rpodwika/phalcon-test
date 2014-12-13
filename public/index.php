@@ -7,7 +7,9 @@
  */
 error_reporting(E_ALL);
 
-use \Phalcon\Config\Adapter\Ini as Config;
+use Phalcon\Mvc\View,
+    Phalcon\Mvc\View\Engine\Volt,
+    \Phalcon\Config\Adapter\Ini as Config;
 
 try {
 
@@ -15,26 +17,31 @@ try {
     $config = new Config('../app/config/config.ini');
     $loader = new \Phalcon\Loader();
     $loader->registerDirs($config->phalcon->toArray())->register();
+
+    /**
+     *  @TODO get this from configuration file
+     */
     $loader->registerNamespaces([
         'Models'    => "../app/models/",
     ]);
+
     $di = new Phalcon\DI\FactoryDefault();
 
-    $di->set('view', function() use ($config) {
-        $view = new \Phalcon\Mvc\View();
-        $view->setViewsDir($config->phalcon->viewsDir);
-        $voltEng     = $config->voltengines->toArray();
-        $suffixs = [];
+    $di->set('voltService', function($view, $di) use($config){
+        $volt = new Volt($view, $di);
+        $volt->setOptions(array(
+            "compiledPath"      => $config->view->compiledPath,
+            "compiledExtension" => $config->view->compliedExtension,
+        ));
+        return $volt;
+    });
 
-        foreach($voltEng as $configKey => &$configVal) {
-            foreach($configVal as $suffix => &$handler){
-                $suffixs['.'.$suffix] = $handler;
-            }
-        }
-
-        $view->registerEngines($suffixs);
-        unset($arr);
-        unset($suffixs);
+    $di->set('view', function() use($config) {
+        $view = new View();
+        $view->setViewsDir($config->view->dir);
+        $view->registerEngines(array(
+            ".volt" => 'voltService'
+        ));
         return $view;
     });
 
@@ -42,18 +49,19 @@ try {
         return new \Phalcon\Db\Adapter\Pdo\Mysql($config->database->toArray());
     });
 
-    //Setup a base URI so that all generated URIs include the "tutorial" folder
     $di->set('url', function(){
         $url = new \Phalcon\Mvc\Url();
         $url->setBaseUri('/');
         return $url;
     });
 
-    //Handle the request
     $application = new \Phalcon\Mvc\Application($di);
 
     echo $application->handle()->getContent();
 
 } catch(\Phalcon\Exception $e) {
+    /**
+     * @TODO Logging exceptions
+     */
     echo "PhalconException: ", $e->getMessage();
 }
