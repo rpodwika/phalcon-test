@@ -6,3 +6,7 @@
 /logs/*
 /app/config/config.ini
 /app/*
+
+### COMPASS
+.sass-cache
+*.css.map
