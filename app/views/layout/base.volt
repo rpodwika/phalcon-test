@@ -7,11 +7,12 @@
     <title>{% block title %}Default title of the page{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
 </head>
 <body>
     {{ partial("partials/header") }}
-    <div class="container">
+    <div class="container" id="main">
     {% block body %}
     {% endblock %}
     </div>

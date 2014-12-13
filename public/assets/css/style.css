@@ -1,0 +1,11 @@
+/* line 4, ../compass/sass/style.scss */
+.shadow {
+  -moz-box-shadow: #000 5px 5px 5px;
+  -webkit-box-shadow: #000 5px 5px 5px;
+  box-shadow: #000 5px 5px 5px;
+}
+
+/* line 8, ../compass/sass/style.scss */
+#main {
+  margin-top: 40px;
+}

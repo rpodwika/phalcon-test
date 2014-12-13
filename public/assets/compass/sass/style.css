@@ -5,10 +5,11 @@ Error: File to import not found or unreadable: compass/css3.
         on line 1 of style.scss
 
 1: @import 'compass/css3';
-2: 
-3: .shadow {
-4:   @include box-shadow(#000 5px 5px 5px);
-5: }
+2: @import 'base';
+3: 
+4: .shadow {
+5:   @include box-shadow(#000 5px 5px 5px);
+6: }
 
 Backtrace:
 style.scss:1
@@ -54,4 +55,4 @@ style.scss:1
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: compass/css3.\A        Load paths:\A          \A         on line 1 of style.scss\A \A 1: @import 'compass/css3';\A 2: \A 3: .shadow {\A 4:   @include box-shadow(#000 5px 5px 5px);\A 5: }"; }
+  content: "Error: File to import not found or unreadable: compass/css3.\A        Load paths:\A          \A         on line 1 of style.scss\A \A 1: @import 'compass/css3';\A 2: @import 'base';\A 3: \A 4: .shadow {\A 5:   @include box-shadow(#000 5px 5px 5px);\A 6: }"; }
