@@ -12,4 +12,9 @@ class TasksController extends \Phalcon\Mvc\Controller
     {
          $this->view->tasks = Models\Tasks::find();
     }
+
+    public function addAction()
+    {
+
+    }
 }
